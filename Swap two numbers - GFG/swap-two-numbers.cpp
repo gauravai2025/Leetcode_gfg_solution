@@ -10,11 +10,13 @@ using namespace std;
 class Solution{   
 public:
     pair<int, int> get(int a, int b){
-        // //complete the function here
-        // int temp=a;
-        // a=b;
-        // b=temp;
-        pair<int,int>ans={b,a};
+        // power of xor
+        a=a^b;
+        b=a^b;
+        a=a^b;
+        
+       
+        pair<int,int>ans={a,b};
        
         return ans;
     }
