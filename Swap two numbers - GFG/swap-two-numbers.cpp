@@ -14,9 +14,9 @@ public:
         int temp=a;
         a=b;
         b=temp;
-        pair<int,int>ans;
-        ans.first=a;
-        ans.second=b;
+        pair<int,int>ans={a,b};
+        // ans.first=a;
+        // ans.second=b;
         return ans;
     }
 };
