@@ -13,17 +13,17 @@ void pushZerosToEnd(int arr[], int n) {
     for (int right = 0; right < n; right++) {
         if (arr[right] != 0) {
             // If the current element is non-zero, move it to the left pointer position
-            arr[left] = arr[right];
+            swap(arr[left] ,arr[right]);
 
             // Increment the left pointer
             left++;
         }
     }
 
-    // Set all the remaining elements to zero
-    for (int i = left; i < n; i++) {
-        arr[i] = 0;
-    }
+    // // Set all the remaining elements to zero
+    // for (int i = left; i < n; i++) {
+    //     arr[i] = 0;
+    // }
 }
 
 };
