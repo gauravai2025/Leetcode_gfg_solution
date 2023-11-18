@@ -32,9 +32,10 @@ public:
 
     int solve(int n, int k, vector<int> &stalls) {
         
-        int st=1;
+        int st=0;
         int max1=*max_element(stalls.begin(),stalls.end());
-        int end=max1-1;
+         int min1=*min_element(stalls.begin(),stalls.end());
+        int end=max1-min1;
         int mid;
         int ans=1;
         
