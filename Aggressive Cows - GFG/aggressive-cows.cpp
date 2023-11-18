@@ -19,13 +19,14 @@ class Solution {
                 cnt++;
                 preval=arr[i];
             }
+             if(cnt>=k)
+        return 1;
             
         }
         
-        if(cnt<k)
+       
+        
         return 0;
-        else 
-        return 1;
     }
     
 public:
