@@ -7,38 +7,37 @@ using namespace std;
 class Solution
 {
     private:
- int solvedp(int wt[],int val[],int index,int w, vector<vector<int>>&dp){
-        // base case
-        if(index==0){
-            if(wt[0]<=w)
-            return val[0];
-            else
-            return 0;
-        }
-        // access value of already calculated value
-        if(dp[index][w]!=-1)
-        return dp[index][w];
-        
-        int include=0;
-        if(wt[index]<=w){
-            include=val[index]+solvedp(wt,val,index-1,w-wt[index],dp);
-            
-        }
-        int exclude=0+solvedp(wt,val,index-1,w,dp);
-        
-      dp[index][w]=max(include,exclude);
-      return dp[index][w];
-        
+ int solvedptab(int wt[], int val[], int n, int w) {
+    vector<vector<int>> dp(n, vector<int>(w + 1, 0));
+
+    // base case
+    for (int i = wt[0]; i <= w; i++) {
+        if (wt[0] <= w)
+            dp[0][i] = val[0];
+        else
+            dp[0][i] = 0;
     }
-    public:
-    //Function to return max value that can be put in knapsack of capacity W.
-    int knapSack(int W, int wt[], int val[], int n) 
-    { 
-        int index=n-1;
-        // define 2 D vector
-        vector<vector<int>>dp(n,vector<int>(W+1,-1));
-      return solvedp(wt,val,index,W,dp);
+
+    for (int i = 1; i < n; i++) {
+        for (int j = 0; j <= w; j++) {
+            int include = 0;
+            if (wt[i] <= j)
+                include = val[i] + dp[i - 1][j - wt[i]];
+
+            int exclude = dp[i - 1][j];
+            dp[i][j] = max(include, exclude);
+        }
     }
+
+    return dp[n - 1][w];
+}
+
+public:
+// Function to return max value that can be put in knapsack of capacity W.
+int knapSack(int W, int wt[], int val[], int n) {
+    return solvedptab(wt, val, n, W);
+}
+
 };
 
 //{ Driver Code Starts.
