@@ -6,38 +6,29 @@ using namespace std;
 // } Driver Code Ends
 class Solution
 {
-    private:
- int solvedptab(int wt[], int val[], int n, int w) {
-    vector<vector<int>> dp(n, vector<int>(w + 1, 0));
-
-    // base case
-    for (int i = wt[0]; i <= w; i++) {
-        if (wt[0] <= w)
-            dp[0][i] = val[0];
-        else
-            dp[0][i] = 0;
-    }
-
-    for (int i = 1; i < n; i++) {
-        for (int j = 0; j <= w; j++) {
-            int include = 0;
-            if (wt[i] <= j)
-                include = val[i] + dp[i - 1][j - wt[i]];
-
-            int exclude = dp[i - 1][j];
-            dp[i][j] = max(include, exclude);
+    public:
+    //Function to return max value that can be put in knapsack of capacity W.
+    int knapSack(int W, int wt[], int val[], int n) 
+    { 
+        vector<vector<int>>dp(n+1,vector<int>(W+1,0));
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=W;j++){
+                // i can included
+                if(j>=wt[i-1]){
+                if(dp[i-1][j]<dp[i-1][j-wt[i-1]]+val[i-1])
+                dp[i][j]=dp[i-1][j-wt[i-1]]+val[i-1];
+                else
+                // value less
+                dp[i][j]=dp[i-1][j];
+                    
+                }
+                else
+                  dp[i][j]=dp[i-1][j];
+            }
         }
+        
+        return dp[n][W];
     }
-
-    return dp[n - 1][w];
-}
-
-public:
-// Function to return max value that can be put in knapsack of capacity W.
-int knapSack(int W, int wt[], int val[], int n) {
-    return solvedptab(wt, val, n, W);
-}
-
 };
 
 //{ Driver Code Starts.
