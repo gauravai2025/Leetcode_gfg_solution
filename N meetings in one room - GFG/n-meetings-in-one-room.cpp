@@ -6,7 +6,6 @@ using namespace std;
 
 class meeting{
     public:
-    int duration;
     int arrival;
     int depart;
 };
@@ -30,7 +29,7 @@ class Solution
         meeting arr[n];
         
         for(int i=0;i<n;i++){
-            arr[i].duration=end[i]-start[i];
+
             arr[i].arrival=start[i];
             arr[i].depart=end[i];
         }
@@ -39,27 +38,27 @@ class Solution
         vector<meeting>valid;
         
         int cnt=0;
-        for(int i=0;i<n;i++){
-            if(i==0){
-                cnt++;
-                valid.push_back(arr[i]);
-            }
-            else{
-                bool flag=1;
-                for(auto &it:valid){
-                  if (arr[i].arrival <= it.depart && arr[i].depart >= it.arrival)
-{
-                        flag=0;
-                        break;
-                    }
-                }
-                if(flag){
-                cnt++;
-            valid.push_back(arr[i]);
-                }
-            }
-            
+        for (int i = 0; i < n; i++) {
+    if (i == 0) {
+        cnt++;
+        valid.push_back(arr[i]);
+    }
+    else {
+        bool flag = true;
+        meeting it = valid.back();
+        if (arr[i].arrival <= it.depart && arr[i].depart >= it.arrival) {
+            flag = false;
         }
+
+        if (flag) {
+            cnt++;
+            valid.push_back(arr[i]);
+        }
+    }
+}
+
+            
+        
         return cnt;
             
     }
