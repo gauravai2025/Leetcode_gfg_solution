@@ -47,17 +47,20 @@ class Solution
         
         int profit=0;
         int cntjb=0;
-        
+        bool flag=false;
      for(int i=0;i<n;i++){
           for(int j=arr[i].dead;j>=1;j--){
               if(seq[j]==-1){
                   profit+=arr[i].profit;
                   cntjb++;
                   seq[j]=arr[i].id;
+                 flag= true;
                   break;
               }
               
           }
+          if(flag==0)
+          break;
      }   
        ans.push_back(cntjb);
         ans.push_back(profit);
