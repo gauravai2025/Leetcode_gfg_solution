@@ -35,25 +35,22 @@ class Solution
         }
         
         sort(arr,arr+n,comp);
-        vector<meeting>valid;
+     
         
         int cnt=0;
+        int lastend=0;
         for (int i = 0; i < n; i++) {
-    if (i == 0) {
+            
+        if (i == 0) {
         cnt++;
-        valid.push_back(arr[i]);
+        lastend=arr[i].depart;
     }
+    
     else {
-        bool flag = true;
-        meeting it = valid.back();
-        if (arr[i].arrival <= it.depart && arr[i].depart >= it.arrival) {
-            flag = false;
-        }
-
-        if (flag) {
-            cnt++;
-            valid.push_back(arr[i]);
-        }
+       if(arr[i].arrival>lastend){
+           cnt++;
+           lastend=arr[i].depart;
+       }
     }
 }
 
