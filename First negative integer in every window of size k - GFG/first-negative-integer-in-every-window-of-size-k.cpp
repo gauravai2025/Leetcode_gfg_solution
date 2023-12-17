@@ -32,11 +32,11 @@ int main() {
 vector<long long> printFirstNegativeInteger(long long int A[],
                                              long long int n, long long int k) {
                                                  
-        deque<pair<int,int>>q;
+        queue<pair<int,int>>q;
         
         for(int i=0;i<k;i++){
             if(A[i]<0){
-                q.push_back({A[i],i});
+                q.push({A[i],i});
             }
         }
         
@@ -54,10 +54,10 @@ vector<long long> printFirstNegativeInteger(long long int A[],
           
           for(int i=k;i<n;i++){
               if(!q.empty() && curr.second==i-k)
-              q.pop_front();
+              q.pop();
               
               if(A[i]<0)
-              q.push_back({A[i],i});
+              q.push({A[i],i});
               
               if(!q.empty()){
               curr=q.front();
