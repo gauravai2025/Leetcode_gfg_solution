@@ -117,44 +117,29 @@ vector<int> reverseLevelOrder(Node *root)
 {
     // code here
      vector<int>ans;
-     vector<vector<int>>level;
-      
+    
       queue<Node*>q;
       q.push(root);
-      q.push(NULL);
-      vector<int>output;
+    
+   
       
       while(!q.empty()){
           
           Node* frontnode=q.front();
           q.pop();
           
-          if(frontnode==NULL){
-              level.push_back(output);
-              output.clear();
-             if (!q.empty())
-              q.push(NULL);
-          }
+         
+          ans.push_back(frontnode->data);
           
-          else{
-          output.push_back(frontnode->data);
-          
+        if(frontnode->right!=NULL)
+          q.push(frontnode->right);
           
           if(frontnode->left!=NULL)
           q.push(frontnode->left);
           
-           if(frontnode->right!=NULL)
-          q.push(frontnode->right);
-          
-          
       }
-      }
-      reverse(level.begin(),level.end());
+      reverse(ans.begin(),ans.end());
       
-      for(auto &it:level){
-          for(auto &val:it){
-              ans.push_back(val);
-          }
-      }
+      
       return ans;
 }
