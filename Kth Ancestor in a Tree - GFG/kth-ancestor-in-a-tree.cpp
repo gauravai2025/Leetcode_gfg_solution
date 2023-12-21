@@ -112,7 +112,7 @@ struct Node
 */
 // your task is to complete this function
 
-   bool ancestor(struct Node *root,int target,vector<int>&ans){
+   bool ancestor(struct Node *root,int target,int&ans,int &cnt,int k){
         if(root==NULL)
         return false;
         
@@ -121,8 +121,10 @@ struct Node
        
         }
         
-        if(ancestor(root->left,target,ans) || ancestor(root->right,target,ans)){
-            ans.push_back(root->data);
+        if(ancestor(root->left,target,ans,cnt,k) || ancestor(root->right,target,ans,cnt,k)){
+           cnt++;
+           if(cnt==k)
+           ans=root->data;
             return 1;
         }
         
@@ -131,14 +133,11 @@ struct Node
     
 int kthAncestor(Node *root, int k, int node)
 {
-        vector<int>ans;
+        int ans=-1;
+        
         if(root==NULL)
         return -1;
-        
-        ancestor(root,node,ans);
-        int tlancestor=ans.size();
-        
-        if(k>tlancestor)
-        return  -1;
-        return ans[k-1];
+        int cnt=0;
+        ancestor(root,node,ans,cnt, k);
+        return ans;
 }
