@@ -5,22 +5,20 @@ using namespace std;
 // } Driver Code Ends
 class Solution
 {
-    int cnt_bit(int n){
-        int cnt=0;
-        while(n!=0){
-            cnt++;
-            n-=n&(-n);
-        }
-        return cnt;
-        
-    }
   public:
     int minOperation(int n)
     {
         //code here.
-        int ans=log2(n)+cnt_bit(n);
+        int ans=0;
+        while(n>0){
+            if(n&1)
+            n--;
+            
+            else
+            n=n>>1;
+            ans++;
+        }
         return ans;
-        
     }
 };
 
